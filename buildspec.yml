@@ -13,15 +13,15 @@ phases:
     commands: 
     - echo Build started on `date` 
     - echo Building the Docker image... 
-    - docker build -t $APPLICATION_NAME:$IMAGE_TAG .
-    - docker tag $APPLICATION_NAME:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG 
+    - docker build -t spring-boot-sample-app:latest .
+    - docker tag spring-boot-sample-app:latest 202023668061.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app:latest 
   post_build: 
     commands: 
     - echo Build completed on `date` 
     - echo pushing to repo
     - docker push $REPOSITORY_URI:$IMAGE_TAG
     - echo Writing image definitions file... 
-    - printf '[{"name":"SpringBootAppContainer", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+    - printf '[{"name":"SpringBootAppContainer", "imageUri":"%s"}]' 202023668061.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
