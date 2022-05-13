@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine as build
+FROM adoptopenjdk/openjdk11:alpine as build
 
 RUN apk add --update ca-certificates && rm -rf /var/cache/apk/* && \
     find /usr/share/ca-certificates/mozilla/ -name "*.crt" -exec keytool -import -trustcacerts \
